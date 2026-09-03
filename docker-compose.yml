@@ -1,8 +1,7 @@
 services:
   frontend:
     container_name: devboard-front
-    build:
-     context: ./frontend
+    image: shashank971/devboard-frontend:latest
     ports:
      - "${FRONTEND_HOST_PORT}:80"
     networks:
@@ -11,8 +10,7 @@ services:
      - backend   
   backend:
    container_name: devboard-back
-   build:
-    context: ./backend
+   image: shashank971/devboard-backend:latest
    ports:
     - "${BACKEND_HOST_PORT}:8080"
    networks:
