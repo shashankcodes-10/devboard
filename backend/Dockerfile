@@ -9,6 +9,8 @@ RUN go mod download
 
 COPY . .
 
+USER root
+
 RUN CGO_ENABLED=0 go build -o backend
 
 #-----------------------runner-----------------------
