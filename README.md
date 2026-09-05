@@ -225,8 +225,7 @@ This project demonstrates a production-oriented containerized full-stack applica
 - CI/CD security scanning
 - Docker image publishing
 
-## Application Screenshot
+## 👤 Original Authors
+This project was originally created by **LondheShubham153**.
 
-The screenshot below shows the DevBoard application running with real project and task data loaded from PostgreSQL.
-
-![DevBoard running application](./assets/devboard.png)
+Original Repository: [https://github.com/LondheShubham153](https://github.com/LondheShubham153)
