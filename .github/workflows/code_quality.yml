@@ -24,6 +24,7 @@ jobs:
 
      - name: linting for node
        run: npm run lint
+       working-directory: frontend
 
      - name: set up go 
        uses: actions/setup-go@v7
