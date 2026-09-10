@@ -1,0 +1,17 @@
+name: SONAR SCAN
+
+on:
+  workflow_call:
+
+jobs:
+   sonar-scan:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: code checkout
+        uses: actions/checkout@v7
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@8.2.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

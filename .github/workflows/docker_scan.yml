@@ -29,8 +29,8 @@ jobs:
        run: docker build -t devboard-${{ matrix.folders}}:latest  .
        working-directory: ${{ matrix.folders}}
 
-     - name: Run Trivy vulnerability scanner
-       uses: aquasecurity/trivy-action@v0.36.0
+     - name: Run Trivy vulnerability scanner        # ---------------- IMAGE SCAN ----------------
+       uses: aquasecurity/trivy-action@v0.36.0  
        continue-on-error: true
        with:
           image-ref: 'devboard-${{ matrix.folders}}:latest'
