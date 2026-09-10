@@ -14,9 +14,29 @@ jobs:
      - name: code checkout
        uses: actions/checkout@v7
 
-     - name: hadolint
+     - name: hadolint     # ---------------- DOCKERFILE SCAN ----------------
        uses: hadolint/hadolint-action@v3.1.0
        with:
         dockerfile: ${{ matrix.folders}}/Dockerfile     
 
-        
+     - name: login to docker hub
+       uses: docker/login-action@v4
+       with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+     - name: docker image build
+       run: docker build -t devboard-${{ matrix.folders}}:latest  .
+       with:
+        working-directory: ${{ matrix.folders}}
+
+     - name: Run Trivy vulnerability scanner
+       uses: aquasecurity/trivy-action@v0.36.0
+       continue-on-error: true
+       with:
+          image-ref: 'devboard-${{ matrix.folders}}:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
