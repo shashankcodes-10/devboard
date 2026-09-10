@@ -38,7 +38,7 @@ jobs:
       working-directory: backend
 
     - name: Run Govulncheck
-      run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+      run: go run golang.org/x/vuln/cmd/govulncheck@v1.1.4 ./...
       working-directory: backend
 
 
