@@ -35,6 +35,17 @@ jobs:
 
     - name: Download Dependencies
       run: go mod download
+      working-directory: backend
 
     - name: Run Govulncheck
       run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+      working-directory: backend
+
+
+#-------------for fixing dependency issues----------------------
+#cd frontend
+#npm install -D @vitejs/plugin-react@latest
+#npm audit fix
+#npm audit      
+#npm install react-router-dom@7.18.3
+#npm audit
