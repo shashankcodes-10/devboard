@@ -9,4 +9,4 @@ jobs:
     uses: ./.github/workflows/code_quality.yml
 
   secrets_scanning:
-   uses:  ./.github/workflows/git_leaks.yml
+   uses:  ./.github/workflows/secrets_scanning.yml
