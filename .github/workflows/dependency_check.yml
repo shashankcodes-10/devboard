@@ -24,6 +24,7 @@ jobs:
     
     - name:  Dependency Vulnerability Scan
       run: npm audit
+      working-directory: frontend
 # ---------------- BACKEND ----------------
     - name: setup go
       uses: actions/setup-go@v7
