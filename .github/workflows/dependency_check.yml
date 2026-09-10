@@ -1,0 +1,39 @@
+name: DEPENDENCY CHECK 
+
+on: 
+  workflow_call:
+
+jobs:
+  dependency_check:
+   runs-on: ubuntu-latest
+ # ---------------- FRONTEND ----------------  
+  steps:
+    - name: code checkout
+      uses: actions/checkout@v7
+
+    - name: setup node
+      uses: actions/setup-node@7
+      with:
+        node-version: '26'
+        cache: npm
+        cache-dependency-path: frontend/package-lock.json 
+
+    - name: install dependency
+      run: npm ci --legacy-peer-deps
+      working-directory: frontend
+    
+    - name:  Dependency Vulnerability Scan
+      run: npm audit
+# ---------------- BACKEND ----------------
+    - name: setup go
+      uses: actions/setup-go@v7
+      with:
+        go-version: '1.22'
+        go-version-file: backend/go.mod
+        cache-dependency-path: backend/go.sum
+
+    - name: Download Dependencies
+      run: go mod download
+
+    - name: Run Govulncheck
+      run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
