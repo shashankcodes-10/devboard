@@ -16,7 +16,7 @@ jobs:
        with:
         node-version: '26'
         cache: npm
-        cache-dependency-path: package-lock.json
+        cache-dependency-path: frontend/package-lock.json
 
      - name: installing npm packages
        run: npm ci --legacy-peer-deps
