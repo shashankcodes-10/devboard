@@ -23,4 +23,8 @@ jobs:
   #   secrets: inherit  
 
   code_test:
-    uses:  ./.github/workflows/code_test.yml     
+    uses:  ./.github/workflows/code_test.yml    
+
+  docker_push:
+    uses:  ./.github/workflows/docker_push.yml   
+    secrets: inherit   
