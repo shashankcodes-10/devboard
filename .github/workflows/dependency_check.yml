@@ -42,9 +42,19 @@ jobs:
 
 
 #-------------for fixing dependency issues----------------------
+
+#-------------frontend fix ------------------------------------------
 #cd frontend
 #npm install -D @vitejs/plugin-react@latest
 #npm audit fix
 #npm audit      
 #npm install react-router-dom@7.18.3
 #npm audit
+
+#-------------backend fix ------------------------------------------
+# cd backend
+# go mod edit -go=1.25
+# go get golang.org/x/net@v0.38.0
+# go mod tidy
+# go build ./...
+# go run golang.org/x/vuln/cmd/govulncheck@v1.1.4 ./...
