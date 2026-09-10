@@ -7,7 +7,7 @@ jobs:
   dependency_check:
    runs-on: ubuntu-latest
  # ---------------- FRONTEND ----------------  
-  steps:
+   steps:
     - name: code checkout
       uses: actions/checkout@v7
 
