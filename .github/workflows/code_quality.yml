@@ -35,6 +35,10 @@ jobs:
         go-version-file: backend/go.mod
         cache-dependency-path:  backend/go.sum     
 
+     - name: Download Dependencies
+       run: go mod download
+       working-directory: backend
+
      - name: run go formatter
        run: |
           test -z "$(gofmt -l .)"

@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: code checkout
         uses: actions/checkout@v7
-
+ # ---------------- FRONTEND ----------------
       - name: setup node
         uses: actions/setup-node@v6
         with:
@@ -17,16 +17,24 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
+      - name: install dependency
+        run: npm ci --legacy-peer-deps    
+
       - name: code test for node
         run: npm run test
         working-directory: frontend
 
+ # ---------------- BACKEND ----------------
       - name: setup go
         uses: actions/setup-go@v6
         with:
           go-version: '1.25'
           go-version-file: backend/go.mod
           cache-dependency-path: backend/go.sum
+
+      - name: Download Dependencies
+        run: go mod download
+        working-directory: backend 
 
       - name: code test for go
         run: go test
