@@ -17,12 +17,12 @@ jobs:
       - name: docker login
         uses: docker/login-action@v4
         with:
-          username: ${{ DOCKERHUB_USERNAME }}
-          password: ${{ DOCKERHUB_TOKEN }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: docker build and push
         uses: docker/build-push-action@v7
         with:
           context: ${{ matrix.folders}}  
           push: true
-          tags: ${{ DOCKERHUB_USERNAME }}/devboard-${{ matrix.folders}}-githubactions:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folders}}-githubactions:latest
