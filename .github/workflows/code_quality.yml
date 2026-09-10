@@ -1,8 +1,7 @@
 name: CODE QUALITY  
 
 on:
-  push:
-    branches: [main]
+  workflow-call:
 
 jobs:
   code_quality:

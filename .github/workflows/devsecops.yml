@@ -1,0 +1,12 @@
+name: DEVSECOPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  code_quality:
+    uses: ./.github/workflows/code_quality.yml
+
+  secrets_scanning:
+   uses:  ./.github/workflows/git_leaks.yml
