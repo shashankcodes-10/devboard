@@ -1,7 +1,7 @@
 name: CODE QUALITY  
 
 on:
-  workflow-call:
+  workflow_call:
 
 jobs:
   code_quality:
