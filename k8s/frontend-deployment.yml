@@ -5,20 +5,20 @@ metadata:
   name: frontend-deployment
   namespace: devboard
   labels:
-      app: devboard
+      app: devboard-front
 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: devboard
+      app: devboard-front
 
   template:
     metadata:
       name: devboard-frontend
       namespace: devboard
       labels:
-        app: devboard
+        app: devboard-front
 
     spec:
       containers:

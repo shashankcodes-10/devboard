@@ -2,13 +2,13 @@ kind: Service
 apiVersion : v1
 
 metadata: 
-  name: frontend
+  name: backend
   namespace: devboard
 spec:
   selector:
-    app: devboard-front
+    app: devboard-back
 
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8081
+      targetPort: 8080
