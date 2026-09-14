@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: postgres-deployment
+  namespace: devboard
+  labels:
+    app: devboard-db 
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devboard-db
+
+template:
+    metadata:
+      name: db-devboard 
+      namespace: devboard
+      labels:
+        app: devboard-db
+
+    spec:
+      containers:
+       - name:  db-devboard 
+         image: shashank971/devboard-backend:latest
+         ports:
+          - containerPort: 5432
+         envFrom:
+          - secretRef:
+              name: secret-devboard
+          - configMapRef:
+              name: configmap-devboard    
+
+

@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: postgres
+  namespace: devboard
+spec:  
+  selector:
+    app: devboard-db
+
+  ports:
+    -  protocol: TCP
+       port: 5432
+       targetPort: 5432
+       
