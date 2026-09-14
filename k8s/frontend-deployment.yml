@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: frontend-deployment
+  namespace: devboard
+  labels:
+      app: devboard
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: devboard
+
+  template:
+    metadata:
+      name: devboard-frontend
+      namespace: devboard
+      labels:
+        app: devboard
+
+    spec:
+      containers:
+        - name: devboard-frontend    
+          image: shashank971/devboard-frontend:latest
+          ports:
+            - containerPort: 80
