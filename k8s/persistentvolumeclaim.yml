@@ -1,4 +1,4 @@
-kind: PersistenVolumeClaim
+kind: PersistentVolumeClaim
 apiVersion: v1
 
 metadata:
@@ -13,5 +13,6 @@ spec:
     requests:
       storage: 2Gi
   selector:
-    app: devboard-pv
+   matchLabels:
+     app:  devboard-pv
 

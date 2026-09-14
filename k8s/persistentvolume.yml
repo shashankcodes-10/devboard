@@ -12,5 +12,5 @@ spec:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
-  hostpath:
+  hostPath:
     path: /mnt/data    

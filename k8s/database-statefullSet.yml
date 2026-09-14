@@ -1,8 +1,8 @@
-kind: StatefullSet
+kind: StatefulSet
 apiVersion: apps/v1
 
 metadata:
-  name: postgres-deployment
+  name: postgres-statefulset
   namespace: devboard
   labels:
     app: devboard-db 
@@ -13,7 +13,7 @@ spec:
     matchLabels:
       app: devboard-db
 
-template:
+  template:
     metadata:
       name: db-devboard 
       namespace: devboard
@@ -23,7 +23,7 @@ template:
     spec:
       containers:
        - name:  db-devboard 
-         image: shashank971/devboard-backend:latest
+         image:  postgres:16
          ports:
           - containerPort: 5432
          envFrom:
@@ -33,11 +33,18 @@ template:
               name: configmap-devboard    
          volumeMounts:
           - name: db
-            mountPath: /var/lib/postgresql
+            mountPath: /var/lib/postgresql/data
 
-      volume:
+          - name: init
+            mountPath:  /docker-entrypoint-initdb.d  
+
+      volumes:
         - name: db
-          PersistenVolumeClaim:
-            claimName: pvc-devboard           
+          persistentVolumeClaim:
+            claimName: pvc-devboard         
+
+        - name: init
+          configMap:
+            name: postgres-init       
 
 
