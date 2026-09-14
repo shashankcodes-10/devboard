@@ -1,8 +1,7 @@
 name: DEVSECOPS
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   code_quality:
