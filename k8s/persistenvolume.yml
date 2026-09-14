@@ -1,0 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+
+metadata:
+  name: pv-devboard
+  labels:
+    app: devboard-pv
+
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostpath:
+    path: /mnt/data    

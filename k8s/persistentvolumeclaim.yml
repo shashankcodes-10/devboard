@@ -1,0 +1,17 @@
+kind: PersistenVolumeClaim
+apiVersion: v1
+
+metadata:
+  name: pvc-devboard
+  namespace: devboard
+
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    app: devboard-pv
+

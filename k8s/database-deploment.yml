@@ -1,4 +1,4 @@
-kind: Deployment
+kind: StatefullSet
 apiVersion: apps/v1
 
 metadata:
@@ -31,5 +31,13 @@ template:
               name: secret-devboard
           - configMapRef:
               name: configmap-devboard    
+         volumeMounts:
+          - name: db
+            mountPath: /var/lib/postgresql
+
+      volume:
+        - name: db
+          PersistenVolumeClaim:
+            claimName: pvc-devboard           
 
 
