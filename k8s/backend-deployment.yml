@@ -26,3 +26,6 @@ spec:
          image: shashank971/devboard-backend:latest
          ports:
           - containerPort: 8080
+         envFrom:
+          - secretRef:
+              name: secret-devboard
