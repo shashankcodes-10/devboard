@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding 
+metadata:
+  name: devboard-admin-role-binding 
+  namespace: devboard
+subjects:
+  - kind: ServiceAccount
+    name: devboard-admin
+    apiGroup: ""
+roleRef:    
+    kind: Role
+    name: devboard-admin-role
+    apiGroup: rbac.authorization.k8s.io
