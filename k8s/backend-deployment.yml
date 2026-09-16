@@ -31,11 +31,11 @@ spec:
               name: secret-devboard
          resources:
             requests:
-              cpu: "100m"
-              memory: "250Mi"
+              cpu: "5m"
+              memory: "12Mi"
             limits:
-              cpu: "200m"
-              memory: "500Mi"
+              cpu: "10m"
+              memory: "24Mi"
 
          startupProbe:
             httpGet:
