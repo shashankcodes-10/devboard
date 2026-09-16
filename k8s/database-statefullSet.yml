@@ -1,72 +1,83 @@
-kind: StatefulSet
 apiVersion: apps/v1
+kind: StatefulSet
 
 metadata:
   name: postgres-statefulset
   namespace: devboard
   labels:
-    app: devboard-db 
+    app: devboard-db
 
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: devboard-db
 
   template:
     metadata:
-      name: db-devboard 
-      namespace: devboard
+      name: db-devboard
       labels:
         app: devboard-db
 
     spec:
       containers:
-       - name:  db-devboard 
-         image:  postgres:16
-         ports:
-          - containerPort: 5432
-         envFrom:
-          - secretRef:
-              name: secret-devboard
-          - configMapRef:
-              name: configmap-devboard    
-         volumeMounts:
-          - name: db
-            mountPath: /var/lib/postgresql/data
+        - name: db-devboard
+          image: postgres:16
 
-          - name: init
-            mountPath:  /docker-entrypoint-initdb.d  
-         resources:
+          ports:
+            - containerPort: 5432
+
+          envFrom:
+            - secretRef:
+                name: secret-devboard
+            - configMapRef:
+                name: configmap-devboard
+
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d
+
+          resources:
             requests:
               cpu: "100m"
               memory: "250Mi"
-            limits: 
+            limits:
               cpu: "200m"
-              memory: "500Mi"     
+              memory: "500Mi"
 
-         readinessProbe:
+          readinessProbe:
             exec:
-               command: ["sh", "-c", "pg_isready -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\""]
+              command: ["sh", "-c","pg_isready -U \"$POSTGRES_USER\" \"-d $POSTGRES_DB\""]
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 2
-            failureThreshold: 3 
+            failureThreshold: 3
 
-         livenessProbe:
+          livenessProbe:
             exec:
-              command: ["sh", "-c", "pg_isready -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\""]
+              command: ["sh", "-c","pg_isready -U \"$POSTGRES_USER\" \"-d $POSTGRES_DB\""]
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 2
-            failureThreshold: 3         
-      volumes:               
-        - name: db
-          persistentVolumeClaim:
-            claimName: pvc-devboard         
+            failureThreshold: 3
 
+      volumes:
         - name: init
           configMap:
-            name: postgres-init       
+            name: postgres-init
 
-
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-storage
+        namespace: devboard
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: manual
+        resources:
+          requests:
+            storage: 2Gi
