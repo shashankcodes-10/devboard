@@ -29,3 +29,11 @@ spec:
          envFrom:
           - secretRef:
               name: secret-devboard
+         resources:
+            requests:
+              cpu: "100m"
+              memory: "250Mi"
+            limits:
+              cpu: "200m"
+              memory: "500Mi"
+            

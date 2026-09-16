@@ -26,3 +26,10 @@ spec:
           image: shashank971/devboard-frontend:latest
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "250Mi"
+            limits:
+              cpu: "200m"
+              memory: " 500Mi"      
